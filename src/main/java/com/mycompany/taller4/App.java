@@ -24,6 +24,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        stage.setTitle("Informacion de Niños");
         var canva = new VBox();
         var Sect1 = new HBox();
         var menu = new MenuBar();
@@ -242,9 +243,11 @@ public class App extends Application {
             }
 
         });
+        
         canva.getChildren().addAll(lb1, tf1, lb2, tf2, lb3, tf3, lb4, tf4, lb5, tf5, btn1, btn2);
-        Scene sc = new Scene(canva);
+        Scene sc = new Scene(canva,500,400);
         sg.setScene(sc);
+        sg.setTitle("Agregar nuevo niño a la lista");
         sg.show();
 
     }
