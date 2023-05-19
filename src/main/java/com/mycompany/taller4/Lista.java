@@ -189,7 +189,7 @@ public class Lista {
                 res.addFinal(item[0], item[1], item[2], Integer.valueOf(item[3]), item[4]); // Asignacion de los elementos del la linea del documento y los agrega a la lista auxiliar.
             }
         } catch (Exception e) {
-
+            
         }
         return res;  // Retorna la lista con los elementos encontrados
     }
@@ -239,6 +239,10 @@ public class Lista {
         Lista Jar = new Lista();
         Lista PreJar = new Lista();
         Children au = cab;
+        if (this.nChil==0) {
+            Lista[] a={Jar,PreJar};
+            return a;
+        }
         while (!au.sig.getId().equals(cab.getId())) {
             if (au.getGrado().equals("JARDIN")) {
                 Jar.addFinal(au.getId(), au.getNombre(), au.getSexo(), au.getEdad(), au.getGrado());
@@ -262,6 +266,10 @@ public class Lista {
         Lista m = new Lista();
         Lista h = new Lista();
         Children au = lista.cab;
+        if (lista.getnChil()==0) {
+            Lista[] a={h,m};
+            return a;
+        }
         while (!au.sig.getId().equals(cab.getId())) {
             if (au.getSexo().equals("HOMBRE")) {
                 h.addFinal(au.getId(), au.getNombre(), au.getSexo(), au.getEdad(), au.getGrado());
