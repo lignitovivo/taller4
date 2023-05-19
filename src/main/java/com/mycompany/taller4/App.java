@@ -48,6 +48,10 @@ public class App extends Application {
         mi6.setOnAction(e -> {
             this.informe(lista.ListasPorGrado()[0]);
         });
+        mi7.setOnAction(e -> {
+            lista.ListasPorGrado()[1].Listar();
+            this.informe(lista.ListasPorGrado()[1]);
+        });
         mi4.setOnAction(e -> {
             this.eliminar();
         });
@@ -246,10 +250,10 @@ public class App extends Application {
         TableView tab1 = new TableView();
         tab1.getColumns().addAll(table.getColumns());
 
-        if (li.getnChil() != 0) {
-            
+        if (li.nChil != 0) {
             var aux = li.getCab();
-            while (!aux.sig.getId().equals(aux.getId())) {
+            var cabaux=li.getCab();
+            while (!aux.sig.getId().equals(cabaux.getId())) {
                 tab1.getItems().addAll(aux);
                 aux = aux.sig;
             }
