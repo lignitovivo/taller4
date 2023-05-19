@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.*;
+import javafx.scene.chart.*;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -45,12 +46,20 @@ public class App extends Application {
         menu.getMenus().addAll(m1, m2, m3, m4);
         Sect1.getChildren().addAll(circ, table);
         canva.getChildren().addAll(menu, Sect1);
+        mi5.setOnAction(e -> {
+            this.informe(lista);
+        });
         mi6.setOnAction(e -> {
             this.informe(lista.ListasPorGrado()[0]);
         });
         mi7.setOnAction(e -> {
-            lista.ListasPorGrado()[1].Listar();
             this.informe(lista.ListasPorGrado()[1]);
+        });
+        mi8.setOnAction(e -> {
+            this.promedio();
+        });
+        mi9.setOnAction(e -> {
+            lista.guardarRegistro(lista.InfoLista());
         });
         mi4.setOnAction(e -> {
             this.eliminar();
@@ -240,6 +249,7 @@ public class App extends Application {
 
     private void informe(Lista li) {
         Stage sg = new Stage();
+        sg.setTitle("INFORME OFICIAL");
         var canva = new HBox();
         var graf= new PieChart();
         var a = new PieChart.Data("Hombres "+li.ListasPorGenero(li)[0].nChil,li.ListasPorGenero(li)[0].nChil );
@@ -264,6 +274,59 @@ public class App extends Application {
         sg.setScene(sc);
         sg.show();
 
+    }
+    
+    public void promedio(){
+        var st= new Stage();
+        st.setTitle("PROMEDIO ESCOLAR POR GRADO Y GENERO");
+        var canva= new HBox();
+        
+        float hombresP=lista.PromedioEdad(lista.ListasPorGrado()[0])[0];
+        float mujeresP=lista.PromedioEdad(lista.ListasPorGrado()[0])[1];
+        float P=lista.PromedioEdad(lista.ListasPorGrado()[0])[2];
+        float hombresJ=lista.PromedioEdad(lista.ListasPorGrado()[1])[0];
+        float mujeresJ=lista.PromedioEdad(lista.ListasPorGrado()[1])[1];
+        float J=lista.PromedioEdad(lista.ListasPorGrado()[1])[2];
+
+        
+        CategoryAxis xAxis    = new CategoryAxis();
+        xAxis.setLabel("Edad");
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Genero");
+        CategoryAxis xAxis1    = new CategoryAxis();
+        xAxis.setLabel("Edad");
+        NumberAxis yAxis1 = new NumberAxis();
+        yAxis.setLabel("Genero");
+
+
+        BarChart     barChart1 = new BarChart(xAxis, yAxis);
+        BarChart     barChart2 = new BarChart(xAxis1, yAxis1);
+
+        XYChart.Series dataSeries1 = new XYChart.Series();
+        dataSeries1.setName("PROMEDIO DE EDAD PARA PREJARDIN");
+
+        dataSeries1.getData().addAll(
+                new XYChart.Data("HOMBRES", hombresP),
+                new XYChart.Data("MUJERES"  , mujeresP),
+                new XYChart.Data("PREJARDIN"  , P)
+        );
+        XYChart.Series dataSeries2 = new XYChart.Series();
+        dataSeries2.setName("PROMEDIO DE EDAD PARA JARDIN");
+
+        dataSeries2.getData().addAll(
+                new XYChart.Data("HOMBRES", hombresJ),
+                new XYChart.Data("MUJERES"  , mujeresJ),
+                new XYChart.Data("PREJARDIN"  ,J)
+//                new XYChart.Data("PREJARDIN"  , ((hombresJ+mujeresJ)/2))
+        );
+        
+        
+        barChart1.getData().add(dataSeries1);
+        barChart2.getData().add(dataSeries2);
+        canva.getChildren().addAll(barChart1,barChart2);
+        var sc=new Scene(canva);
+        st.setScene(sc);
+        st.show();
     }
 
 }

@@ -281,8 +281,42 @@ public class Lista {
         return res;
     }
 
-    public int[] PromedioEdad(Lista lista) {
-        int[] res = {lista.getnChil(), lista.ListasPorGenero(lista)[0].getnChil(), lista.ListasPorGenero(lista)[1].getnChil()};
+    public float[] PromedioEdad(Lista lista) {
+        
+        float[] res = new float[3];
+        var hombres=lista.ListasPorGenero(lista)[0];
+        var mujeres=lista.ListasPorGenero(lista)[1];
+        int sumaH=0;
+        int sumaM=0;
+        if(hombres.nChil!=0){
+            var aux=hombres.cab;
+            while(!aux.sig.getId().equals(hombres.getCab().getId())){
+                sumaH+=aux.getEdad();
+                aux=aux.sig;
+            }
+            sumaH+=aux.getEdad();
+            res[0]=sumaH/hombres.getnChil();
+        }
+        if(mujeres.nChil!=0){
+            var aux=mujeres.cab;
+            while(!aux.sig.getId().equals(mujeres.getCab().getId())){
+                sumaM+=aux.getEdad();
+                aux=aux.sig;
+            }
+            sumaM+=aux.getEdad();
+            res[1]=sumaM/mujeres.getnChil();
+        }
+        if(mujeres.nChil!=0 && hombres.nChil!=0){
+            res[2]=(sumaH+sumaM)/(hombres.nChil+mujeres.nChil);
+        }else{
+            if (hombres.nChil!=0) {
+                res[2]=res[0];
+            }
+            if (mujeres.nChil!=0) {
+                res[2]=res[1];
+            }
+        
+        }
         return res;
     }
 }
