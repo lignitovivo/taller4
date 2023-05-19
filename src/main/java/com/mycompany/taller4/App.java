@@ -1,5 +1,6 @@
 package com.mycompany.taller4;
 
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,7 +60,22 @@ public class App extends Application {
             this.promedio();
         });
         mi9.setOnAction(e -> {
-            lista.guardarRegistro(lista.InfoLista());
+            var res= new Alert(Alert.AlertType.CONFIRMATION);
+            res.setTitle("GUARDA LISTADO");
+            res.setContentText("¿Estas seguro que deseas guardar la lista actual?");
+            res.setHeaderText("Guardadon listado actual");
+            
+            Optional<ButtonType> result= res.showAndWait();
+            if (result.get()==ButtonType.OK ){
+                lista.guardarRegistro(lista.InfoLista());
+                Alert a=new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("Confirmacion de Proceso");
+                a.setHeaderText("¡En Hora Buena!");
+                a.setContentText("Se a Guardado correctamente");
+                a.show();
+            }
+            
+//            lista.guardarRegistro(lista.InfoLista());
         });
         mi4.setOnAction(e -> {
             this.eliminar();
