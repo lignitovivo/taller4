@@ -65,7 +65,7 @@ public class App extends Application {
 //        lista.addFinal("222","Danna", "Mujer", 7, "jardin");
 //        lista.addFinal("333","Jose", "Hombre", 5, "Prejardin");
 //        lista.guardarRegistro(lista.InfoLista());
-        System.out.println(lista.getnChil());
+//        System.out.println(lista.getnChil());
 //        lista=lista.LeerDoc();
 //        System.out.println(lista.InfoLista());
 //        lista.guardarRegistro(lista.InfoLista());
@@ -75,6 +75,9 @@ public class App extends Application {
         var scene = new Scene(canva);
         stage.setScene(scene);
         stage.show();
+        lista.ListasPorGrado()[0].Listar();
+        var list=lista.ListasPorGrado()[0];
+        System.out.println(list.ListasPorGenero(list)[0].getnChil());
 
     }
 
@@ -235,16 +238,14 @@ public class App extends Application {
         Stage sg = new Stage();
         var canva = new HBox();
         var graf= new PieChart();
-        System.out.println(1);
-        var a = new PieChart.Data("Hombres "+lista.ListasPorGenero(li)[0].getnChil(), lista.ListasPorGenero(li)[0].getnChil());
-            System.out.println(2);
-        var b = new PieChart.Data("Mujeres "+lista.ListasPorGenero(li)[1].getnChil(), lista.ListasPorGenero(li)[1].getnChil());
-            System.out.println(3);
+        var a = new PieChart.Data("Hombres "+li.ListasPorGenero(li)[0].nChil,li.ListasPorGenero(li)[0].nChil );
+        var b = new PieChart.Data("Mujeres "+li.ListasPorGenero(li)[1].nChil, li.ListasPorGenero(li)[1].nChil);
+
         graf.getData().addAll(a,b);
-//        var sect1 = new HBox();
+
         TableView tab1 = new TableView();
         tab1.getColumns().addAll(table.getColumns());
-        System.out.println("numero de niños"+li.getnChil());
+
         if (li.getnChil() != 0) {
             
             var aux = li.getCab();
@@ -258,7 +259,7 @@ public class App extends Application {
         var sc = new Scene(canva);
         sg.setScene(sc);
         sg.show();
-         System.out.println(4);
+
     }
 
 }
