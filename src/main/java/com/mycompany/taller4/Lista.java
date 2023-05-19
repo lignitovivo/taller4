@@ -110,9 +110,17 @@ public class Lista {
             a.show();
             return;
         }
+        if(this.nChil==1){
+//            var res = new Lista();
+            cab=null;
+            cola=cab;
+            this.nChil--;
+            return;
+        }
         if (cab.getId().equals(id)) {
             cola.sig = cab.sig;
             cab = cab.sig;
+            this.nChil--;
             return;
         }
 
@@ -129,7 +137,7 @@ public class Lista {
         if (cola.getId().equals(id)) {
             cola = ant;
         }
-
+        this.nChil--;
     }
 
     public void addDespid(String id, String name, String sexo, int edad, String grado, String idr) {

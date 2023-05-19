@@ -137,6 +137,11 @@ public class App extends Application {
     }
 
     private void actualizarTable() {
+        if (lista.nChil==0) {
+            for (int i = 0; i < table.getItems().size(); i++) {
+                table.getItems().clear();
+            }
+        }
         if (lista.nChil != 0) {
             for (int i = 0; i < table.getItems().size(); i++) {
                 table.getItems().clear();
